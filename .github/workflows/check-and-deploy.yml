@@ -24,7 +24,7 @@ defaults:
 
 jobs:
   terraform:
-    name: "Terraform - Chbrx Infrastructure"
+    name: "Terraform"
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
