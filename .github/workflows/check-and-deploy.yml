@@ -17,6 +17,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_KEY }}
   TF_VAR_certificate_email: ${{ vars.CERTIFICATE_EMAIL }}
+  TF_VAR_github_pat: ${{ secrets.GH_RUNNER_TOKEN }}
 
 defaults:
   run:
@@ -25,13 +26,16 @@ defaults:
 jobs:
   terraform:
     name: "Terraform"
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       pull-requests: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Decode Kube Config
+        run: echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
