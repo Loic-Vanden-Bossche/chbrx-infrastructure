@@ -37,6 +37,11 @@ jobs:
       - name: Decode Kube Config
         run: mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
