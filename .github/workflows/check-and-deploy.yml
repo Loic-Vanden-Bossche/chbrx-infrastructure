@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Decode Kube Config
-        run: echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
+        run: mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
