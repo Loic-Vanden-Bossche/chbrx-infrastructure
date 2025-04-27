@@ -1,3 +1,5 @@
+name: Check And Deploy Chbrx Infrastructure
+
 on:
   push:
     branches:
@@ -25,6 +27,7 @@ defaults:
 
 jobs:
   build-and-push:
+    name: "Build and Push Runners Docker Image"
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -56,6 +59,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: runner.Dockerfile
           push: true
           tags: ghcr.io/${{ env.REPO_LC }}:latest
 
