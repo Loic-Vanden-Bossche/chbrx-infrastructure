@@ -27,7 +27,7 @@ defaults:
 
 jobs:
   build-and-push:
-    name: "Build and Push Runners Docker Image"
+    name: "Build and Push Runners"
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -61,7 +61,7 @@ jobs:
           context: .
           file: runner.Dockerfile
           push: true
-          tags: ghcr.io/${{ env.REPO_LC }}:latest
+          tags: ghcr.io/${{ env.REPO_LC }}-runner:latest
 
   terraform:
     name: "Terraform"
