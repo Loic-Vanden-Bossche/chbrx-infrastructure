@@ -8,3 +8,4 @@ spec:
   template:
     spec:
       repository: Loic-Vanden-Bossche/chbrx-infrastructure
+      image: ghcr.io/Loic-Vanden-Bossche-chbrx-infrastructure-runner:latest
