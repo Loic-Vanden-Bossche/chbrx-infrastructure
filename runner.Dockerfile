@@ -2,7 +2,7 @@
 FROM summerwind/actions-runner:latest
 #
 ## Switch to root user
-#USER 0
+USER 0
 #
 ## Install gh and Node.js 22
 #RUN apt-get update && \
@@ -20,4 +20,4 @@ FROM summerwind/actions-runner:latest
 #    apt-get clean && rm -rf /var/lib/apt/lists/*
 #
 ## Switch back to the non-root user (IMPORTANT)
-#USER 1001
+USER 1001
