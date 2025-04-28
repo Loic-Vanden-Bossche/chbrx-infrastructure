@@ -8,7 +8,7 @@ resource "kubernetes_manifest" "letsencrypt_production_issuer" {
     spec = {
       acme = {
         server = "https://acme-v02.api.letsencrypt.org/directory"
-        email  = var.certificate_email
+        email  = var.email
         privateKeySecretRef = {
           name = "letsencrypt-production"
         }
@@ -16,7 +16,7 @@ resource "kubernetes_manifest" "letsencrypt_production_issuer" {
           {
             http01 = {
               ingress = {
-                class = "nginx"
+                class = var.nginx_ingress_class
               }
             }
           }

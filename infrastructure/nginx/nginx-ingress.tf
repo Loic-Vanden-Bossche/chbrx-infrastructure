@@ -23,7 +23,7 @@ resource "helm_release" "nginx_ingress" {
         }
 
         ingressClassResource = {
-          name    = "nginx"
+          name    = var.ingress_class
           enabled = true
           default = true
         }
