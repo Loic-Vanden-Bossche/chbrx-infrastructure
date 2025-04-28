@@ -14,3 +14,24 @@ variable "github_pat" {
   type        = string
   sensitive   = true
 }
+
+variable "ghcr_username" {
+  description = "GitHub username used to pull the images"
+  type        = string
+}
+
+variable "ghcr_token" {
+  description = "GitHub secret used to pull the images"
+  type        = string
+  sensitive   = true
+}
+
+variable "runner_image" {
+  description = "GitHub runner image"
+  type        = string
+}
+
+variable "repository_name" {
+  description = "GitHub repository name"
+  type        = string
+}

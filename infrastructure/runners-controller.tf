@@ -1,7 +1,7 @@
 resource "helm_release" "arc" {
   name             = "actions-runner-controller"
-  namespace        = "actions-runner-system"
-  create_namespace = true
+  namespace        = kubernetes_namespace.actions_runner_system.metadata[0].name
+  create_namespace = false
 
   repository = "https://actions-runner-controller.github.io/actions-runner-controller"
   chart      = "actions-runner-controller"

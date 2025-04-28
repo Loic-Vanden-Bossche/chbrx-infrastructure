@@ -2,15 +2,48 @@ resource "helm_release" "cert_manager" {
   name             = "cert-manager"
   repository       = "https://charts.jetstack.io"
   chart            = "cert-manager"
-  namespace        = "cert-manager"
-  create_namespace = true
+  namespace        = kubernetes_namespace.cert_manager.metadata[0].name
+  create_namespace = false
 
   values = [
-    file("values/cert-manager.yaml")
+    yamlencode({
+      installCRDs = true
+      extraArgs = [
+        "--dns01-recursive-nameservers-only",
+        "--dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53"
+      ]
+      global = {
+        telemetry = {
+          enabled = false
+        }
+      }
+      prometheus = {
+        enabled = false
+      }
+      webhook = {
+        resources = {
+          requests = {
+            cpu    = "10m"
+            memory = "64Mi"
+          }
+          limits = {
+            cpu    = "100m"
+            memory = "128Mi"
+          }
+        }
+      }
+      cainjector = {
+        resources = {
+          requests = {
+            cpu    = "10m"
+            memory = "64Mi"
+          }
+          limits = {
+            cpu    = "100m"
+            memory = "128Mi"
+          }
+        }
+      }
+    })
   ]
-
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
 }
