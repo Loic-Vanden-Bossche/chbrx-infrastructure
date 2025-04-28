@@ -38,9 +38,9 @@ jobs:
       image_tag: ${{ env.IMAGE_TAG }}
 
     steps:
-      - name: Set lowercase repository name
+      - name: Set repository name
         id: repo
-        run: echo "IMAGE_TAG=ghcr.io/${GITHUB_REPOSITORY,,}-runner:latest" >> $GITHUB_ENV
+        run: echo "IMAGE_TAG=ghcr.io/${GITHUB_REPOSITORY}-runner:latest" >> $GITHUB_ENV
 
       - id: check
         run: |

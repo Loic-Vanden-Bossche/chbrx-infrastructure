@@ -11,7 +11,7 @@ resource "kubernetes_manifest" "chbrx_runner_deployment" {
       template = {
         spec = {
           repository = var.repository_name
-          image      = var.runner_image
+          image      = lower(var.runner_image)
           imagePullSecrets = [
             {
               name = kubernetes_secret.image_pull.metadata[0].name
