@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths:
-      - 'infrastructure'
+      - 'infrastructure/**'
       - '.github/workflows/check-and-deploy.yml'
   pull_request:
     branches:
       - main
     paths:
-      - 'infrastructure'
+      - 'infrastructure/**'
       - '.github/workflows/check-and-deploy.yml'
 
 env:
