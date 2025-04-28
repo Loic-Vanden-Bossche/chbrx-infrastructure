@@ -11,12 +11,12 @@ resource "kubernetes_manifest" "chbrx_runner_deployment" {
       template = {
         spec = {
           repository = var.repository_name
-          image      = var.runner_image
-          imagePullSecrets = [
-            {
-              name = kubernetes_secret.image_pull.metadata[0].name
-            }
-          ]
+          image      = "summerwind/actions-runner:latest"
+          # imagePullSecrets = [
+          #   {
+          #     name = kubernetes_secret.image_pull.metadata[0].name
+          #   }
+          # ]
         }
       }
     }
