@@ -1,10 +1,9 @@
 # Use the official ARC runner image as base
 FROM summerwind/actions-runner:latest
 
-# Switch to root user
-USER 0
+USER root
 
-# Install gh and Node.js 22
+## Install gh and Node.js 22
 RUN apt-get update && \
     apt-get install -y curl gnupg && \
     # Install GitHub CLI
@@ -19,5 +18,4 @@ RUN apt-get update && \
     apt-get install -y nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Switch back to the non-root user (IMPORTANT)
-USER 1001
+USER runner
