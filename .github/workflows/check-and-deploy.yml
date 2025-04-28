@@ -22,8 +22,8 @@ defaults:
     working-directory: infrastructure
 
 jobs:
-  build-and-push:
-    name: "Build and Push Runners"
+  build-and-push-runner:
+    name: "Build and Push Runner"
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -89,6 +89,7 @@ jobs:
       TF_VAR_repository_name: ${{ github.repository }}
       TF_VAR_ghcr_username: ${{ github.repository_owner }}
       TF_VAR_ghcr_token: ${{ secrets.GH_IMAGE_PULL_TOKEN }}
+      TF_VAR_runner_image: ${{ needs.build-and-push.outputs.image_tag }}
 
     permissions:
       pull-requests: write
