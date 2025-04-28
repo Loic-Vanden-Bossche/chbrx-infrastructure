@@ -79,7 +79,7 @@ jobs:
     name: "Terraform"
     runs-on: self-hosted
     needs:
-      - build-and-push
+      - build-and-push-runner
 
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY_ID }}
@@ -89,7 +89,7 @@ jobs:
       TF_VAR_repository_name: ${{ github.repository }}
       TF_VAR_ghcr_username: ${{ github.repository_owner }}
       TF_VAR_ghcr_token: ${{ secrets.GH_IMAGE_PULL_TOKEN }}
-      TF_VAR_runner_image: ${{ needs.build-and-push.outputs.image_tag }}
+      TF_VAR_runner_image: ${{ needs.build-and-push-runner.outputs.image_tag }}
 
     permissions:
       pull-requests: write
