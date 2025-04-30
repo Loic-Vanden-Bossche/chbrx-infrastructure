@@ -21,7 +21,7 @@ module "monitoring" {
 
   source = "./monitoring"
 
-  nginx_ingress_class = module.nginx.ingress_class
+  nginx_ingress_class     = module.nginx.ingress_class
   certificate_issuer_name = module.cert_manager.issuer_name
 }
 
