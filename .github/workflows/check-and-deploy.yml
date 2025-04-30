@@ -52,7 +52,8 @@ jobs:
           fi
           echo "skipped=true" >> $GITHUB_OUTPUT
 
-      - uses: SonarSource/sonarqube-scan-action@v4
+      - name: Sonarqube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
         if: ${{ steps.check.outputs.skipped == 'false' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
