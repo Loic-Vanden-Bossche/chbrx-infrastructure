@@ -16,6 +16,19 @@ module "cert_manager" {
   email               = var.certificate_email
 }
 
+module "monitoring" {
+  depends_on = [module.storage]
+
+  source = "./monitoring"
+
+  nginx_ingress_class = module.nginx.ingress_class
+  certificate_issuer_name = module.cert_manager.issuer_name
+}
+
+module "storage" {
+  source = "./storage"
+}
+
 module "nginx" {
   source = "./nginx"
 }
