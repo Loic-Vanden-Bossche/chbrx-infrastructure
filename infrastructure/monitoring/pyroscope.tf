@@ -1,6 +1,6 @@
 resource "helm_release" "pyroscope" {
   name       = "pyroscope"
-  namespace  = "monitoring"
+  namespace  = kubernetes_namespace.monitoring.metadata[0].name
   repository = "https://grafana.github.io/helm-charts"
   chart      = "pyroscope"
   version    = "1.13.1"  # Replace with the latest version if available
