@@ -1,7 +1,6 @@
 module "action_runners" {
   depends_on = [module.cert_manager]
-
-  source = "./action-runners"
+  source     = "./action-runners"
 
   image             = var.runner_image
   repository_name   = var.repository_name
@@ -10,7 +9,8 @@ module "action_runners" {
 }
 
 module "cert_manager" {
-  source = "./cert_manager"
+  depends_on = [module.network]
+  source     = "./cert_manager"
 
   nginx_ingress_class = module.nginx.ingress_class
   email               = var.certificate_email
@@ -18,18 +18,25 @@ module "cert_manager" {
 
 module "monitoring" {
   depends_on = [module.storage]
-
-  source = "./monitoring"
+  source     = "./monitoring"
 
   nginx_ingress_class     = module.nginx.ingress_class
   certificate_issuer_name = module.cert_manager.issuer_name
 }
 
 module "storage" {
-  source = "./storage"
+  depends_on = [module.network]
+  source     = "./storage"
 }
 
 module "nginx" {
-  source = "./nginx"
+  depends_on = [module.network]
+  source     = "./nginx"
+}
+
+module "network" {
+  source = "./network"
+
+  node_address = var.node_address
 }
 

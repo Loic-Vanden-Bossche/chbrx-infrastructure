@@ -13,7 +13,7 @@ resource "helm_release" "longhorn" {
   values = [
     yamlencode({
       defaultSettings = {
-        defaultReplicaCount = 2
+        defaultReplicaCount = 1
         defaultDataPath     = "/var/lib/longhorn"
       }
       persistence = {
