@@ -40,3 +40,9 @@ variable "node_address" {
   description = "Node address for the Kubernetes cluster"
   type        = string
 }
+
+variable "plausible_secret_key_base" {
+  description = "Secret key base for Plausible Analytics"
+  type        = string
+  sensitive   = true
+}
