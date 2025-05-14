@@ -23,11 +23,16 @@ resource "helm_release" "cilium" {
 
       routingMode = "native"
 
+      loadBalancer = {
+        enabled = true
+        mode    = "dsr"
+      }
+
       hostServices = {
         enabled = true
       }
 
-      masquerade = true
+      masquerade = false
 
       nodePort = {
         enabled = true

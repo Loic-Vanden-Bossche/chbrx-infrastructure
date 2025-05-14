@@ -10,16 +10,19 @@ resource "helm_release" "nginx_ingress" {
       controller = {
         replicaCount = 1
 
-        hostPort = {
+        service = {
           enabled = true
+          type    = "NodePort"
+          externalTrafficPolicy = "Local"
           ports = {
             http  = 80
             https = 443
           }
-        }
 
-        service = {
-          enabled = false
+          nodePorts = {
+            http  = 30080
+            https = 30443
+          }
         }
 
         ingressClassResource = {
@@ -37,6 +40,14 @@ resource "helm_release" "nginx_ingress" {
           patch = {
             enabled = true
           }
+        }
+
+        config = {
+          use-proxy-protocol         = "true"
+          real-ip-header             = "proxy_protocol"
+          set-real-ip-from           = "0.0.0.0/0"
+          use-forwarded-headers      = "true"
+          compute-full-forwarded-for = "true"
         }
 
         extraArgs = {

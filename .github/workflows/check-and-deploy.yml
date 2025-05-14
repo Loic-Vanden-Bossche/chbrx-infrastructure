@@ -100,7 +100,6 @@ jobs:
       TF_VAR_ghcr_token: ${{ secrets.GH_IMAGE_PULL_TOKEN }}
       TF_VAR_runner_image: ${{ needs.build-and-push-runner.outputs.image_tag }}
       TF_VAR_node_address: ${{ vars.NODE_ADDRESS }}
-      TF_VAR_plausible_secret_key_base: ${{ secrets.PLAUSIBLE_SECRET_KEY_BASE }}
 
     permissions:
       pull-requests: write
