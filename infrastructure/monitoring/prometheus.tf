@@ -4,7 +4,7 @@ resource "helm_release" "kube_prometheus_stack" {
 
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
-  version = "71.0.0" # (or latest stable)
+  version    = "71.0.0" # (or latest stable)
 
   create_namespace = false
 
@@ -16,17 +16,17 @@ resource "helm_release" "kube_prometheus_stack" {
 
         additionalDataSources = [
           {
-            name   = "Loki"
-            type   = "loki"
-            url    = "http://loki.monitoring.svc.cluster.local:3100"
-            access = "proxy"
+            name     = "Loki"
+            type     = "loki"
+            url      = "http://loki.monitoring.svc.cluster.local:3100"
+            access   = "proxy"
             jsonData = {}
           },
           {
-            name   = "Pyroscope"
-            type   = "grafana-pyroscope-datasource"
-            url    = "http://pyroscope.monitoring.svc.cluster.local:4040"
-            access = "proxy"
+            name     = "Pyroscope"
+            type     = "grafana-pyroscope-datasource"
+            url      = "http://pyroscope.monitoring.svc.cluster.local:4040"
+            access   = "proxy"
             jsonData = {}
           }
         ]
@@ -40,7 +40,7 @@ resource "helm_release" "kube_prometheus_stack" {
           hosts = ["grafana.chbrx.com"]
           tls = [
             {
-              hosts = ["grafana.chbrx.com"]
+              hosts      = ["grafana.chbrx.com"]
               secretName = "grafana-tls"
             }
           ]

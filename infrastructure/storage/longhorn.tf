@@ -1,8 +1,8 @@
 
 
 resource "helm_release" "longhorn" {
-  name       = "longhorn"
-  namespace  = kubernetes_namespace.storage.metadata[0].name
+  name      = "longhorn"
+  namespace = kubernetes_namespace.storage.metadata[0].name
 
   repository = "https://charts.longhorn.io"
   chart      = "longhorn"

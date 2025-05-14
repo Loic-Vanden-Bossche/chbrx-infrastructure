@@ -15,11 +15,11 @@ resource "kubernetes_ingress_v1" "matomo" {
     name      = "matomo-ingress"
     namespace = "analytics"
     annotations = {
-      "nginx.ingress.kubernetes.io/ssl-redirect"          = "true"
-      "nginx.ingress.kubernetes.io/force-ssl-redirect"    = "true"
-      "cert-manager.io/cluster-issuer"                    = var.certificate_issuer_name
-      "nginx.ingress.kubernetes.io/backend-protocol"      = "HTTP"
-      "nginx.ingress.kubernetes.io/proxy-set-headers"     = kubernetes_config_map.nginx_headers.metadata[0].name
+      "nginx.ingress.kubernetes.io/ssl-redirect"       = "true"
+      "nginx.ingress.kubernetes.io/force-ssl-redirect" = "true"
+      "cert-manager.io/cluster-issuer"                 = var.certificate_issuer_name
+      "nginx.ingress.kubernetes.io/backend-protocol"   = "HTTP"
+      "nginx.ingress.kubernetes.io/proxy-set-headers"  = kubernetes_config_map.nginx_headers.metadata[0].name
     }
   }
 
@@ -27,7 +27,7 @@ resource "kubernetes_ingress_v1" "matomo" {
     ingress_class_name = var.nginx_ingress_class
 
     tls {
-      hosts = ["analytics.chbrx.com"]
+      hosts       = ["analytics.chbrx.com"]
       secret_name = "matomo-cert"
     }
 
@@ -58,11 +58,11 @@ resource "kubernetes_ingress_v1" "test_echo" {
     name      = "echo-test"
     namespace = "default"
     annotations = {
-      "nginx.ingress.kubernetes.io/proxy-set-headers" = kubernetes_config_map.nginx_headers.metadata[0].name
-      "nginx.ingress.kubernetes.io/ssl-redirect"          = "true"
-      "nginx.ingress.kubernetes.io/force-ssl-redirect"    = "true"
-      "cert-manager.io/cluster-issuer"                    = var.certificate_issuer_name
-      "nginx.ingress.kubernetes.io/backend-protocol"      = "HTTP"
+      "nginx.ingress.kubernetes.io/proxy-set-headers"  = kubernetes_config_map.nginx_headers.metadata[0].name
+      "nginx.ingress.kubernetes.io/ssl-redirect"       = "true"
+      "nginx.ingress.kubernetes.io/force-ssl-redirect" = "true"
+      "cert-manager.io/cluster-issuer"                 = var.certificate_issuer_name
+      "nginx.ingress.kubernetes.io/backend-protocol"   = "HTTP"
     }
   }
 

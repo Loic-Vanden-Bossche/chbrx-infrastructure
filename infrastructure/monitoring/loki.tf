@@ -75,15 +75,15 @@ resource "helm_release" "loki" {
         }
 
         compactor = {
-          working_directory      = "/var/loki/compactor"
-          retention_enabled      = true
-          delete_request_store   = "filesystem"
+          working_directory    = "/var/loki/compactor"
+          retention_enabled    = true
+          delete_request_store = "filesystem"
         }
 
         limits_config = {
-          retention_period            = "336h"  # 14 days
-          allow_structured_metadata   = true
-          ingestion_rate_strategy = "global"
+          retention_period          = "336h" # 14 days
+          allow_structured_metadata = true
+          ingestion_rate_strategy   = "global"
         }
 
         persistence = {

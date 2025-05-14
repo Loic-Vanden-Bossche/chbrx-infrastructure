@@ -11,8 +11,8 @@ resource "helm_release" "nginx_ingress" {
         replicaCount = 1
 
         service = {
-          enabled = true
-          type    = "NodePort"
+          enabled               = true
+          type                  = "NodePort"
           externalTrafficPolicy = "Local"
           ports = {
             http  = 80

@@ -9,7 +9,7 @@ resource "helm_release" "cilium" {
 
   values = [
     yamlencode({
-      kubeProxyReplacement      = true
+      kubeProxyReplacement = true
       ipam = {
         mode = "kubernetes"
       }

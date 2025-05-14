@@ -3,7 +3,7 @@ resource "helm_release" "sonarqube" {
   namespace  = kubernetes_namespace.monitoring.metadata[0].name
   repository = "https://SonarSource.github.io/helm-chart-sonarqube"
   chart      = "sonarqube"
-  version = "2025.2.0" # Replace with the latest community-supported version
+  version    = "2025.2.0" # Replace with the latest community-supported version
 
   create_namespace = false
 
@@ -34,7 +34,7 @@ resource "helm_release" "sonarqube" {
           }
           tls = [
             {
-              hosts = ["sonarqube.chbrx.com"]
+              hosts      = ["sonarqube.chbrx.com"]
               secretName = "sonarqube-tls"
             }
           ]

@@ -45,11 +45,11 @@ resource "helm_release" "promtail" {
                   target_label  = "container"
                 },
                 {
-                  action         = "replace"
-                  replacement    = "/var/log/pods/*$1/*.log"
-                  separator      = "/"
-                  source_labels  = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
-                  target_label   = "__path__"
+                  action        = "replace"
+                  replacement   = "/var/log/pods/*$1/*.log"
+                  separator     = "/"
+                  source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+                  target_label  = "__path__"
                 }
               ]
             }
