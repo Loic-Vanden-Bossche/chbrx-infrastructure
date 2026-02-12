@@ -16,7 +16,7 @@ resource "kubernetes_manifest" "letsencrypt_production_issuer" {
           {
             http01 = {
               ingress = {
-                class = var.nginx_ingress_class
+                ingressClassName = var.nginx_ingress_class
               }
             }
           }

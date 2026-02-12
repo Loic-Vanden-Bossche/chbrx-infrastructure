@@ -10,19 +10,15 @@ resource "helm_release" "nginx_ingress" {
       controller = {
         replicaCount = 1
 
+        # ✅ enable snippet annotations at the controller level
+        allowSnippetAnnotations = true
+
         service = {
           enabled               = true
           type                  = "NodePort"
           externalTrafficPolicy = "Local"
-          ports = {
-            http  = 80
-            https = 443
-          }
-
-          nodePorts = {
-            http  = 30080
-            https = 30443
-          }
+          ports                 = { http = 80, https = 443 }
+          nodePorts             = { http = 30080, https = 30443 }
         }
 
         ingressClassResource = {
@@ -31,38 +27,37 @@ resource "helm_release" "nginx_ingress" {
           default = true
         }
 
-        metrics = {
-          enabled = true
-        }
+        metrics = { enabled = true }
 
         admissionWebhooks = {
           enabled = true
-          patch = {
-            enabled = true
-          }
+          patch   = { enabled = true }
         }
 
+        # ✅ also allow Critical-risk annotations (required for snippets)
         config = {
-          use-proxy-protocol         = "true"
+          annotations-risk-level = "Critical"
+          # (your existing settings, kept as-is)
+          use-proxy-protocol         = "false"
           real-ip-header             = "proxy_protocol"
           set-real-ip-from           = "0.0.0.0/0"
           use-forwarded-headers      = "true"
           compute-full-forwarded-for = "true"
+          enable-gzip                = "true"
+          gzip-types                 = "text/plain text/css text/javascript application/json application/javascript application/xml+rss application/atom+xml image/svg+xml"
+          gzip-min-length            = "256"
+          gzip-vary                  = "true"
+          enable-brotli              = "true"
+          brotli-level               = "6"
+          brotli-types               = "text/plain text/css text/javascript application/json application/javascript application/xml+rss application/atom+xml image/svg+xml"
+          proxy-buffering            = "on"
         }
 
-        extraArgs = {
-          enable-ssl-passthrough = ""
-        }
+        extraArgs = { enable-ssl-passthrough = "" }
 
         resources = {
-          requests = {
-            cpu    = "100m"
-            memory = "128Mi"
-          }
-          limits = {
-            cpu    = "500m"
-            memory = "512Mi"
-          }
+          requests = { cpu = "100m", memory = "128Mi" }
+          limits   = { cpu = "500m", memory = "512Mi" }
         }
 
         nodeSelector = {}
